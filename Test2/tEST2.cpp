@@ -1,52 +1,19 @@
-#include <iostream>
-#include <fstream>
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/stitching/stitcher.hpp"
+#include<iostream>  
+#include <opencv2/core/core.hpp>  
+#include <opencv2/highgui/highgui.hpp>  
 
 
-
-
-using namespace std;
 using namespace cv;
 
 
-bool try_use_gpu = false;
-vector<Mat> imgs;
-string result_name = "result.jpg";
-
-
-//void printUsage();
-//int parseCmdArgs(int argc, char** argv);
-
-
-int main(int argc, char* argv[])
+int main()
 {
-
-
-Mat img=imread("1.jpg");
-imgs.push_back(img);
-img=imread("2.jpg");
-imgs.push_back(img);
-img=imread("3.jpg");
-imgs.push_back(img);
-
-
-Mat pano;
-Stitcher stitcher = Stitcher::createDefault(try_use_gpu);
-Stitcher::Status status = stitcher.stitch(imgs, pano);
-
-
-if (status != Stitcher::OK)
-{
-cout << "Can't stitch images, error code = " << int(status) << endl;
-return -1;
-}
-
-
-imwrite(result_name, pano);
-img=imread("result.jpg");
-imshow("result",img);  
-waitKey(600000);  
-
-return 0;
+	// 读入一张图片（游戏原画）  
+	Mat img = imread("1.jpg");
+	// 创建一个名为 "游戏原画"窗口  
+	cvNamedWindow("游戏原画");
+	// 在窗口中显示游戏原画  
+	imshow("游戏原画", img);
+	// 等待6000 ms后窗口自动关闭  
+	waitKey(6000);
 }
